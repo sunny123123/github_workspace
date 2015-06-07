@@ -15,7 +15,7 @@ import com.sunny.entity.Student;
 
 public class Demo {
 public static void main(String[] args) {
-	fun2();
+	fun1();
 }
 
 //查询数据

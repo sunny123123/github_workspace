@@ -12,9 +12,24 @@
 			<generator class="assigned"></generator>
 		</primary-key>
 	</table>
-<table name="class100" catalog="test100" class="Class100">
+	<table name="class100" catalog="test100" class="Class100">
+		<primary-key>
+			<generator class="assigned"></generator>
+		</primary-key>
+	</table>
+	<table name="course200" catalog="test100" class="Course200">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="student200" catalog="test100" class="Student200">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+<table name="student_course" catalog="test100" class="StudentCourse">
 	<primary-key>
-		<generator class="assigned"></generator>
+		<generator class="identity"></generator>
 	</primary-key>
 </table>
 </hibernate-reverse-engineering>

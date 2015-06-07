@@ -7,6 +7,8 @@ import java.util.Set;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.tool.hbm2ddl.SchemaExport;
 
 import com.sunny.common.HibernateSessionFactory;
 import com.sunny.entity100.Class100;
@@ -14,7 +16,7 @@ import com.sunny.entity100.Student100;
 //双边的一对多，多对一实例
 public class Demo100 {
 public static void main(String[] args) {
-	fun5();
+	initCreateTable();
 }
 //想利用班级给班级的学生填充数据，但没有成功
 public static void fun5(){
@@ -74,5 +76,11 @@ public static void fun1(){
 	session.save(student); 
 	session.getTransaction().commit();
 	session.close();	
+}
+public static void initCreateTable(){
+	Configuration cfg = new Configuration().configure();
+	//SessionFactory sf=new Configuration().configure().buildSessionFactory();
+	SchemaExport export = new SchemaExport(cfg);
+	export.create(true,true);
 }
 }

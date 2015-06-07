@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<!-- Servlet 配置 -->
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>com.sunny.servlet.LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetInitParamServlet</servlet-name>
+    <servlet-class>com.sunny.servlet.GetInitParamServlet</servlet-class>
+      <init-param>
+    	<param-name>encoding</param-name>
+    	<param-value>utf-8</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup><!-- Tomcat启动时加载 -->
+  </servlet>
+  <!-- Filter 配置 -->
+  <filter>
+  	<filter-name>firstFilter</filter-name>
+  	<filter-class>com.sunny.filter.FirstFilter</filter-class>
+  </filter>
+  <filter>
+  	<filter-name>logFilter</filter-name>
+  	<filter-class>com.sunny.filter.LogFilter</filter-class>
+  </filter>
+  <!--Listener 配置 -->
+  <listener>
+  	<listener-class>com.sunny.listener.RequestListener</listener-class>
+  </listener>
+  
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetInitParamServlet</servlet-name>
+    <url-pattern>/getinitparam</url-pattern>
+  </servlet-mapping>
+ <filter-mapping>
+ 	<filter-name>firstFilter</filter-name>
+ 	<url-pattern>/*</url-pattern><!-- 对所有的请求都适用 -->
+ </filter-mapping>
+ <filter-mapping>
+ 	<filter-name>logFilter</filter-name>
+ 	<url-pattern>/*</url-pattern>
+ </filter-mapping>
+  <welcome-file-list>
+    <welcome-file>login</welcome-file>
+  </welcome-file-list>
+  	
+ <env-entry>
+ 	<env-entry-name>username</env-entry-name>
+ 	<env-entry-type>java.lang.String</env-entry-type>
+ 	<env-entry-value>tomcat</env-entry-value>
+  </env-entry>
+ <filter>
+ 	<filter-name>struts2</filter-name>
+ 	<filter-class>
+ 		org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
+ 	</filter-class>
+ </filter>
+ <filter-mapping>
+ 	<filter-name>struts2</filter-name>
+ 	<url-pattern>/*</url-pattern>
+ </filter-mapping></web-app>

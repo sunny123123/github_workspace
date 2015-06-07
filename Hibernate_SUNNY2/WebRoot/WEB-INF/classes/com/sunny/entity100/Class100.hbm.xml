@@ -13,7 +13,7 @@
         <property name="name" type="java.lang.String">
             <column name="name" length="20" />
         </property>
-        <set name="students" lazy="true" fetch="join" inverse="false"><!-- lazy默认为true既打开延时加载 -->
+        <set name="students" lazy="false" cascade="save-update"><!-- lazy默认为true既打开延时加载 -->
             <key>
                 <column name="class_id" /><!-- 定义集合所对应的数据库表的外键,class_id位student表的外键 --> 
             </key>
