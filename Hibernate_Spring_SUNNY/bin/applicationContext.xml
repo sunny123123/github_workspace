@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!-- 一、Hibernate中采用配置文件的方式，class="org.springframework.orm.hibernate3.LocalSessionFactoryBean" -->
+	<!-- 二、Hibernate中采用注解的方式,class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean" -->
+	<!--
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="configLocation"
+			value="file:src/hibernate.cfg.xml">
+		</property>
+	</bean>
+	-->
+	<!-- 上面采用是利用原有的Hibernate配置文件，但是在插入数据时候，显示了sql语句，没有报错，但数据库中没有记录 -->
+	<!-- 下面在Spring的配置文件中配置数据库的相关信息，没有问题 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		 <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		 <property name="url" value="jdbc:mysql://localhost:3306/test100?useunicode=true&amp;characterEncoding=utf-8"/>
+		 <property name="username" value="root"/>
+		 <property name="password" value="niit"/>
+	</bean>
+	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="show_sql">true</prop>
+				<prop key="format_sql">true</prop>
+			</props>
+		</property>
+		<property name="packagesToScan">
+			<list>
+				<value>com.sunny.entity</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="dao" class="com.sunny.service.impl.DaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>	
+	</bean>
+	</beans>
